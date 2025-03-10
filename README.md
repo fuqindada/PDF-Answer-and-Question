@@ -6,6 +6,7 @@
 
 1. **query_search.py**：负责加载模型、处理PDF文件、计算文本嵌入、相似度匹配以及重排序。
 2. **pdf_reader.py**：负责读取PDF文件内容、清理文本、分割文本块。
+3. **deepseekAnalyse.py**:接入deepseek。
 
 ### 文件结构
 
@@ -16,6 +17,7 @@
 ├── pdf_reader
         ├── pdf_dir/
         ├── query_search.py
+        ├── deepseekAnalyse.py
         └── pdf_reader.py
 ├── demo.py
 └── README.md
