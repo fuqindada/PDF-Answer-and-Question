@@ -5,7 +5,7 @@ from langchain_deepseek import ChatDeepSeek
 from query_search import get_my_model, read_embeddings, get_n_maximum_similarity, get_rerank_score
 
 def get_model():
-    os.environ["DEEPSEEK_API_KEY"] = "sk-58eddbec03f341afb094410c381d1e4f"
+    os.environ["DEEPSEEK_API_KEY"] = "sk-***"
     model = ChatDeepSeek(
         model="deepseek-chat",
         temperature=0,
