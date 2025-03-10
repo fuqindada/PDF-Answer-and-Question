@@ -127,6 +127,17 @@
   - 返回:
     - 所有分割后的文本块和对应的索引
 
+#### deepseekAnalyse.py
+- **加载 DeepSeek 模型 (get_model)**
+  - 设置环境变量 DEEPSEEK_API_KEY，以确保能够访问 DeepSeek API。
+  - 初始化 ChatDeepSeek 模型，并配置相关参数（如 temperature、max_tokens 等），以控制生成的回答质量。
+  - 返回初始化后的模型对象。
+- **主函数 (main)**
+  - 检查并生成嵌入数据库 如果当前目录下不存在 embeddings.db 文件，则调用 query_search.py 中的 main_function 方法生成 PDF 文件的文本嵌入数据，并保存为数据库文件。
+  - 加载模型和嵌入数据 调用 get_my_model 方法加载两个预训练模型（bgem3_model 和 rerank_model）及其对应的 tokenizer。 定义查询文本列表 query_list，例如包含问题：“什么是气溶胶光散射吸湿性?”、“SMPS仪器是什么?”、“FIMS仪器是什么?”。 
+  - 使用 bgem3_model 计算查询文本的嵌入向量 query_embedding。 调用 read_embeddings 方法读取已保存的 PDF 文本块嵌入数据 db_chunks、db_embeddings 及其索引 all_chunks_idx，并将嵌入数据转换为 PyTorch 张量格式。
+  - 获取最相似的文本块 调用 get_n_maximum_similarity 方法计算查询文本与所有文本块之间的相似度，并返回前 N 个最相似的文本块索引 top_n_index。
+  - 调用 DeepSeek API 获取回答 初始化 DeepSeek 模型。 遍历每个查询文本，根据相似度最高的文本块构建对话消息。 调用 model.invoke 方法将构建的消息发送给 DeepSeek API，并获取回答内容。 处理返回的回答内容，去除多余的换行符，并打印最终结果。
 ### 依赖项
 
 请确保安装以下依赖项：
